@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: gender-service
+server:
+  port: ${PORT:8920}
+eureka:
+  instance:
+    hostname: localhost
+    metadataMap:
+      zone: zone1
+spring
+  jpa
+    hibernate
+      ddl-auto=update
+    properties
+      hibernate
+        dialect = org.hibernate.dialect.MySQL5Dialect
+  datasource
+    url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/gender-service
+    username=date3253
+    password=cucu
+  data
+    rest
+      basePath=/api
+logging
+  level
+    org
+      springframework=info
+    hibernate
+      SQL=debug
+    com=debug
