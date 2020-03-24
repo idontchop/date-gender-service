@@ -14,14 +14,14 @@ public interface UserRepository extends CrudRepository<User,Long> {
 	Optional<User> findByName(String name);
 	
 	@Query ( "SELECT name FROM User u WHERE "
-			+ "u.interestedIn = :interestedIn AND u.gender = :gender AND "
+			+ "u.interestedIn.id = :interestedIn AND u.gender.id = :gender AND "
 			+ "u.name IN (:potentials)")
 	List<String> findNameByGenderAndInterestedInAndNameIn
-		(Gender gender, Gender interestedIn, List<String> potentials);
+		(long gender, long interestedIn, List<String> potentials);
 
 	@Query ( "SELECT name FROM User u WHERE "
-			+ "u.interestedIn = :interestedIn AND u.gender = :gender")
+			+ "u.interestedIn.id = :interestedIn AND u.gender.id = :gender")
 	List<String> findNameByGenderAndInterestedIn
-		(Gender gender, Gender interestedIn);
+		(long gender, long interestedIn);
 
 }

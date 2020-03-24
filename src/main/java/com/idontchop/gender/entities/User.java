@@ -22,15 +22,13 @@ public class User {
 	private String name;
 	
 	@NotNull
-	@ManyToOne (fetch = FetchType.EAGER,
-				cascade = CascadeType.ALL,
-				mappedBy = "gender")
+	@ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn ( name = "gender_id")
 	private Gender gender;
 	
 	@NotNull
-	@ManyToOne (fetch = FetchType.EAGER,
-				cascade = CascadeType.ALL,
-				mappedBy = "interested_in")
+	@ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL )
+	@JoinColumn ( name = "interestedin_id")
 	private Gender interestedIn;
 	
 	// Any benefit to this?

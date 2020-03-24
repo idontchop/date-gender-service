@@ -26,7 +26,7 @@ public class GenderService {
 		
 		
 		return userRepository.findNameByGenderAndInterestedInAndNameIn
-				(user.getInterestedIn(), user.getGender(), potentials);
+				(user.getInterestedIn().getId(), user.getGender().getId(), potentials);
 		
 	}
 

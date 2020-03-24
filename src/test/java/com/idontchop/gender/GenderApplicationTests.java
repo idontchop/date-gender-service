@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.idontchop.gender.entities.User;
+import com.idontchop.gender.repositories.GenderRepository;
 import com.idontchop.gender.repositories.UserRepository;
 
 @SpringBootTest
@@ -16,6 +17,9 @@ class GenderApplicationTests {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	GenderRepository genderRepository;
 
 	@Test
 	void contextLoads() {
@@ -24,15 +28,20 @@ class GenderApplicationTests {
 	@Test
 	void testFind () {
 		
-		String user = "1";
-		List<String> potentials = List.of("1","2");
-		User u = userRepository.findByName("1").orElseThrow();
+		String userName = "1";
+		List<String> potentials = List.of("11","2");
+		User u = userRepository.findByName(userName).orElseThrow();
 		
 		System.out.println(u.getUsername());
 		assertTrue (u.getUsername().equals( "1"));
-//		List<String> reducedList = userRepository.findNameByGenderAndInterestedInAndNameIn(u.getGender(), u.getInterestedIn(), potentials);
-		List<String> reducedList = userRepository.findNameByGenderAndInterestedIn(u.getGender(), u.getInterestedIn());
+		//genderRepository.save (u.getGender());
+		//genderRepository.save(u.getInterestedIn());
+		assertTrue(u.getGender().getName().equals("Man"));
+		assertTrue (u.getInterestedIn().getName().equals("Woman"));
+		List<String> reducedList = userRepository.findNameByGenderAndInterestedInAndNameIn(u.getGender().getId(), u.getInterestedIn().getId(), potentials);
+		//List<String> reducedList = userRepository.findNameByGenderAndInterestedIn(u.getGender().getId(), u.getInterestedIn().getId());
 		
 		assertTrue(!reducedList.isEmpty());
+		assertTrue(reducedList.get(0).equals(userName));
 	}
 }
