@@ -1,4 +1,17 @@
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/gender_service
+    username: gender
+    password: 1234
+  data:
+    rest:
+      basePath: /data
   application:
     name: gender-service
 server:
@@ -8,24 +21,10 @@ eureka:
     hostname: localhost
     metadataMap:
       zone: zone1
-spring
-  jpa
-    hibernate
-      ddl-auto=update
-    properties
-      hibernate
-        dialect = org.hibernate.dialect.MySQL5Dialect
-  datasource
-    url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/gender-service
-    username=date3253
-    password=cucu
-  data
-    rest
-      basePath=/api
-logging
-  level
-    org
-      springframework=info
-    hibernate
-      SQL=debug
-    com=debug
+logging:
+  level:
+    org:
+      springframework: info
+    hibernate:
+      SQL: debug
+    com: debug

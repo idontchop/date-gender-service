@@ -1,6 +1,8 @@
 package com.idontchop.gender.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,16 +19,18 @@ public class User {
 	@GeneratedValue ( strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	private String username;
+	private String name;
 	
 	@NotNull
-	@ManyToOne
-	@JoinColumn ( name = "gender_id")
+	@ManyToOne (fetch = FetchType.EAGER,
+				cascade = CascadeType.ALL,
+				mappedBy = "gender")
 	private Gender gender;
 	
 	@NotNull
-	@ManyToOne
-	@JoinColumn ( name = "interestedin_id")
+	@ManyToOne (fetch = FetchType.EAGER,
+				cascade = CascadeType.ALL,
+				mappedBy = "interested_in")
 	private Gender interestedIn;
 	
 	// Any benefit to this?
@@ -34,17 +38,17 @@ public class User {
 	
 
 	public User (String username) {
-		this.username = username;
+		this.name = username;
 	}
 	
 	public User (String username, Gender gender) {
 		this.gender = gender;
-		this.username = username;
+		this.name = username;
 	}
 	
 	public User (String username, Gender gender, Gender interestedIn) {
 		this.gender = gender;
-		this.username = username;
+		this.name = username;
 		this.interestedIn = interestedIn;
 	}
 
@@ -57,11 +61,19 @@ public class User {
 	}
 
 	public String getUsername() {
-		return username;
+		return name;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		this.name = username;
 	}
 
 	public Gender getGender() {
