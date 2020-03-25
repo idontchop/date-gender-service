@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.idontchop.gender.entities.Gender;
 import com.idontchop.gender.entities.User;
 import com.idontchop.gender.repositories.GenderRepository;
 import com.idontchop.gender.repositories.UserRepository;
@@ -24,8 +25,34 @@ class GenderApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
+	
 	@Test
+	void testWhatdoesitdo () {
+		//userRepository.deleteById((long) 138);
+		//userRepository.deleteByName("Nate Man");
+	}
+	
+	void createRecords ( ) {
+		
+		Gender gender = genderRepository.findByName("Man").get();
+		Gender interestedIn = genderRepository.findByName("Woman").get();
+				
+		for ( int c = 21; c < 40; c++ ) {
+			User user = new User(Integer.toString(c));
+			
+			if ( c % 4 == 0) {
+				user.setGender(gender);
+				user.setInterestedIn(interestedIn);
+			} else {
+				user.setGender(interestedIn);
+				user.setInterestedIn(gender);
+			}
+			
+			userRepository.save(user);
+		}
+	}
+
+	
 	void testFind () {
 		
 		String userName = "1";
