@@ -81,5 +81,9 @@ public class GenderService {
 	public User getUser ( String username ) {
 		return userRepository.findByName(username).orElseThrow();
 	}
+	
+	public List<User> getUsersInList ( List<String> names) {
+		return userRepository.findByNameIn(names);
+	}
 
 }

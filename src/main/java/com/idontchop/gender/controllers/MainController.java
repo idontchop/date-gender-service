@@ -4,6 +4,7 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -24,6 +25,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.idontchop.gender.dtos.ReduceRequest;
 import com.idontchop.gender.dtos.RestMessage;
+import com.idontchop.gender.dtos.UserDto;
 import com.idontchop.gender.entities.User;
 import com.idontchop.gender.services.GenderService;
 
@@ -109,6 +111,17 @@ public class MainController {
 	@GetMapping ( value = "/api/user/{username}")
 	public User getUser ( @PathVariable ( name = "username", required=true) String username ) {
 		return genderService.getUser(username);
+	}
+	
+	@GetMapping ( value = "/api/profile/{names}")
+	public List<UserDto> getProfile (
+			@PathVariable(name = "names", required = true) List<String> names) {
+		
+		// serves a list of user dto's with name, gender, interestedin
+		return genderService.getUsersInList(names).stream()
+				.map ( user -> UserDto.from(user))
+				.collect(Collectors.toList());
+				
 	}
 	
 	@GetMapping("/helloWorld")

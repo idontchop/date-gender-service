@@ -29,4 +29,5 @@ public interface UserRepository extends CrudRepository<User,Long> {
 	List<String> findNameByGenderAndInterestedIn
 		(long gender, long interestedIn);
 
+	List<User> findByNameIn(List<String> names);
 }
